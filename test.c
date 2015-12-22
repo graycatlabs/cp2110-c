@@ -47,21 +47,11 @@ int main() {
   printf("Serial Number String: %ls", wsrt);
   printf("\n");
 
-  if (CP2110_uartEnabled(cp2110) < 1) {
-    puts("UART not enabled, enabling...");
+  CP2110_disableUART(cp2110);
 
-    if (CP2110_enableUART(cp2110) < 1) {
-      puts("*Could not enable UART");
-      CP2110_release(cp2110);
-      exit(0);
-    }
-    else puts("UART enabled!");
-  }
-  else puts("UART already enabled");
-
+  CP2110_purgeFIFO(cp2110, FIFO_BOTH);
 
   unsigned char buf[8];
-
 
   ret = CP2110_getUARTConfig(cp2110, buf);
 
@@ -78,6 +68,19 @@ int main() {
   else puts("UART configured!");
 
   ret = CP2110_getUARTConfig(cp2110, buf);
+
+
+  if (CP2110_uartEnabled(cp2110) < 1) {
+    puts("UART not enabled, enabling...");
+
+    if (CP2110_enableUART(cp2110) < 1) {
+      puts("*Could not enable UART");
+      CP2110_release(cp2110);
+      exit(0);
+    }
+    else puts("UART enabled!");
+  }
+  else puts("UART already enabled");
 
   strcpy(tx_buf, "abc");
   printf("Sending message: %s\n", tx_buf);

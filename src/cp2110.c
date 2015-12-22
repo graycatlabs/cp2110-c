@@ -1,8 +1,26 @@
-/* cp2110.c
- * Written by Alex Hiam <alex@graycat.io>
+/**************************************************************************
+ * Copyright (c) 2015 - Gray Cat Labs - https://graycat.io
  *
- * Copyright (c) 2015 - Gray Cat Labs
- * Released under the MIT license.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ **************************************************************************/
+
+/**
+ * @file cp2110.c
+ * @author Alex Hiam - <alex@graycat.io>
+ *
+ * @brief A basic userspcae driver for the CP2110 HID USB-UART IC.
+ *
  */
 
 #include <hidapi/hidapi.h>
@@ -20,7 +38,7 @@ struct hid_device_info *CP2110_enumerate(void) {
 CP2110_dev *CP2110_init(void) {
   CP2110_dev *handle;
   handle = hid_open(CP2110_VID, CP2110_PID, NULL);
-  //hid_set_nonblocking(handle, 1);
+  hid_set_nonblocking(handle, 1);
   return handle;
 }
 
@@ -58,6 +76,14 @@ int CP2110_disableUART(CP2110_dev *handle) {
   return ret;
 }
 
+int CP2110_purgeFIFO(CP2110_dev *handle, CP2110_fifo fifo) {
+  int ret;
+  uint8_t buf[2];
+  buf[0] = REPORT_SET_PURGE_FIFOS;
+  ret = hid_get_feature_report(handle, buf, sizeof(buf));
+  if (ret) return buf[1];
+  return -1;
+}
 
 int CP2110_getUARTConfig(CP2110_dev *handle, uint8_t *config) {
   int ret;
