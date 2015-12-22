@@ -27,9 +27,8 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-
-
 #include "cp2110.h"
+
 
 struct hid_device_info *CP2110_enumerate(void) {
   return hid_enumerate(CP2110_VID, CP2110_PID); 
@@ -133,14 +132,14 @@ int CP2110_setUARTConfig(CP2110_dev *handle,
 }
 
 
-int CP2110_write(CP2110_dev *handle, char *data, int len) {
+int CP2110_write(CP2110_dev *handle, char *tx_buf, int len) {
   int ret, index, n_sent;
   uint8_t buf[REPORT_DATA_MAX];
   n_sent = 0;
   index = 0;
   while (len >= REPORT_DATA_MAX) {
     buf[0] = REPORT_DATA_MAX;
-    buf[1] = data[index];
+    buf[1] = tx_buf[index];
     ret = hid_write(handle, buf, sizeof(buf));
     if (ret < 0) return ret;
     n_sent += ret-1;
@@ -153,7 +152,7 @@ int CP2110_write(CP2110_dev *handle, char *data, int len) {
   }
   if (len) {
     buf[0] = len;
-    buf[1] = data[index];
+    buf[1] = tx_buf[index];
     ret = hid_write(handle, buf, len+1);
     if (ret < 0) return ret;
     n_sent += ret-1;
