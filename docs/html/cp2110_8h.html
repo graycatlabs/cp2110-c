@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>A basic userspcae driver for the CP2110 HID USB-UART IC.  
+<p>A basic userspace driver for the CP2110 HID USB-UART IC.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;hidapi/hidapi.h&gt;</code><br />
@@ -127,9 +127,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a6f1e5d8e0581cd2e3dc6b10b12480ee8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f1e5d8e0581cd2e3dc6b10b12480ee8"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>REPORT_DATA</b>&#160;&#160;&#160;0x01</td></tr>
 <tr class="separator:a6f1e5d8e0581cd2e3dc6b10b12480ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6a0841d1b97cadd6334730fe3132e0e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6a0841d1b97cadd6334730fe3132e0e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REPORT_DATA_MAX</b>&#160;&#160;&#160;0x3F</td></tr>
-<tr class="separator:aa6a0841d1b97cadd6334730fe3132e0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3641526845b7cf209fc262ddc03c5fe7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3641526845b7cf209fc262ddc03c5fe7"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>REPORT_DATA_RX_TX_MAX</b>&#160;&#160;&#160;63</td></tr>
+<tr class="separator:a3641526845b7cf209fc262ddc03c5fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42af88c79d92fcbb38f3cd45b984d2fb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42af88c79d92fcbb38f3cd45b984d2fb"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>REPORT_GET_SET_UART_ENABLE</b>&#160;&#160;&#160;0x41</td></tr>
 <tr class="separator:a42af88c79d92fcbb38f3cd45b984d2fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,8 +164,8 @@ Enumerations</h2></td></tr>
 <tr class="separator:a7beb73d64f4327ebd6a4dbcc472f1c2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4aa1271a8fb4e6a8b3778e50e836b9ab"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cp2110_8h.html#a4aa1271a8fb4e6a8b3778e50e836b9ab">CP2110_parity</a> { <br />
 &#160;&#160;<a class="el" href="cp2110_8h.html#a4aa1271a8fb4e6a8b3778e50e836b9aba90674e2854f8cd4ce76ea0b4cd4546cc">PARITY_NONE</a>, 
-<a class="el" href="cp2110_8h.html#a4aa1271a8fb4e6a8b3778e50e836b9abae6172576b70fc73aefabd529c103c9b8">PARITY_EVEN</a>, 
 <a class="el" href="cp2110_8h.html#a4aa1271a8fb4e6a8b3778e50e836b9aba41443d13b163ffeaf59c4667472bc49c">PARITY_ODD</a>, 
+<a class="el" href="cp2110_8h.html#a4aa1271a8fb4e6a8b3778e50e836b9abae6172576b70fc73aefabd529c103c9b8">PARITY_EVEN</a>, 
 <a class="el" href="cp2110_8h.html#a4aa1271a8fb4e6a8b3778e50e836b9aba652563588a49c10903f6dad93e0fb60b">PARITY_MARK</a>, 
 <br />
 &#160;&#160;<a class="el" href="cp2110_8h.html#a4aa1271a8fb4e6a8b3778e50e836b9aba1a83606b2dd37f807b781c07f276f755">PARITY_SPACE</a>
@@ -176,7 +176,7 @@ Enumerations</h2></td></tr>
 <a class="el" href="cp2110_8h.html#a70b46db66d78cae5e3c1ab7e5f90e8d4acfdf8984b120ec3aeb7af9433af3c83c">FLOW_CONTROL_ENABLED</a>
  }</td></tr>
 <tr class="separator:a70b46db66d78cae5e3c1ab7e5f90e8d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf1a7e90081f0ba07c35b7a0372ae435"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cp2110_8h.html#aaf1a7e90081f0ba07c35b7a0372ae435">cp2110_data_bits</a> { <a class="el" href="cp2110_8h.html#aaf1a7e90081f0ba07c35b7a0372ae435ad0b3c75ee52b5b71c3562d8996056fba">DATA_BITS_5</a> = 0x05, 
+<tr class="memitem:aaf1a7e90081f0ba07c35b7a0372ae435"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cp2110_8h.html#aaf1a7e90081f0ba07c35b7a0372ae435">cp2110_data_bits</a> { <a class="el" href="cp2110_8h.html#aaf1a7e90081f0ba07c35b7a0372ae435ad0b3c75ee52b5b71c3562d8996056fba">DATA_BITS_5</a>, 
 <a class="el" href="cp2110_8h.html#aaf1a7e90081f0ba07c35b7a0372ae435a114089c87f8f4e3b58ec5d157bf0bfc6">DATA_BITS_6</a>, 
 <a class="el" href="cp2110_8h.html#aaf1a7e90081f0ba07c35b7a0372ae435a91ea327d09f1d1d7d490bee43f64906b">DATA_BITS_7</a>, 
 <a class="el" href="cp2110_8h.html#aaf1a7e90081f0ba07c35b7a0372ae435a87507ade1df96e6c36364507f5b75100">DATA_BITS_8</a>
@@ -224,7 +224,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>CP2110_getUARTConfig</
 <tr class="separator:a310e39a5be79341bbba104868b6c148f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A basic userspcae driver for the CP2110 HID USB-UART IC. </p>
+<div class="textblock"><p>A basic userspace driver for the CP2110 HID USB-UART IC. </p>
 <dl class="section author"><dt>Author</dt><dd>Alex Hiam - <a href="#" onclick="location.href='mai'+'lto:'+'ale'+'x@'+'gra'+'yc'+'at.'+'io'; return false;">alex@<span style="display: none;">.nosp@m.</span>gray<span style="display: none;">.nosp@m.</span>cat.i<span style="display: none;">.nosp@m.</span>o</a> </dd></dl>
 
 <p>Definition in file <a class="el" href="cp2110_8h_source.html">cp2110.h</a>.</p>
@@ -402,11 +402,11 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>CP2110_getUARTConfig</
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a4aa1271a8fb4e6a8b3778e50e836b9aba90674e2854f8cd4ce76ea0b4cd4546cc"></a>PARITY_NONE&#160;</td><td class="fielddoc">
 <p>no parity bit. </p>
 </td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a4aa1271a8fb4e6a8b3778e50e836b9abae6172576b70fc73aefabd529c103c9b8"></a>PARITY_EVEN&#160;</td><td class="fielddoc">
-<p>even parity. </p>
-</td></tr>
 <tr><td class="fieldname"><a class="anchor" id="a4aa1271a8fb4e6a8b3778e50e836b9aba41443d13b163ffeaf59c4667472bc49c"></a>PARITY_ODD&#160;</td><td class="fielddoc">
 <p>odd parity. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a4aa1271a8fb4e6a8b3778e50e836b9abae6172576b70fc73aefabd529c103c9b8"></a>PARITY_EVEN&#160;</td><td class="fielddoc">
+<p>even parity. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="a4aa1271a8fb4e6a8b3778e50e836b9aba652563588a49c10903f6dad93e0fb60b"></a>PARITY_MARK&#160;</td><td class="fielddoc">
 <p>parity bit always logical 1. </p>
@@ -776,7 +776,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>CP2110_getUARTConfig</
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 23 2015 09:37:10 for cp2110-c by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 23 2015 12:11:29 for cp2110-c by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

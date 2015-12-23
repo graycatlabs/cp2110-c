@@ -173,26 +173,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keywordflow">else</span> puts(<span class="stringliteral">&quot;UART already enabled&quot;</span>);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  strcpy(tx_buf, <span class="stringliteral">&quot;abc&quot;</span>);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  printf(<span class="stringliteral">&quot;Sending message: %s\n&quot;</span>, tx_buf);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  ret = <a class="code" href="cp2110_8h.html#ae45e7dd328df2cd6b7297eafa3aad506">CP2110_write</a>(cp2110, tx_buf, strlen(tx_buf));</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  printf(<span class="stringliteral">&quot;return: %d\n&quot;</span>, ret);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  puts(<span class="stringliteral">&quot;reading...&quot;</span>);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  ret = <a class="code" href="cp2110_8h.html#a310e39a5be79341bbba104868b6c148f">CP2110_read</a>(cp2110, rx_buf, 10);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="comment">//strcpy(tx_buf, &quot;abc&quot;);</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordflow">for</span> (i=0; i&lt;130; i++) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    tx_buf[i] = (uint8_t) i;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="comment">//printf(&quot;Sending message: %s\n&quot;, tx_buf);</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  ret = <a class="code" href="cp2110_8h.html#ae45e7dd328df2cd6b7297eafa3aad506">CP2110_write</a>(cp2110, tx_buf, i);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  printf(<span class="stringliteral">&quot;return: %d\n&quot;</span>, ret);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  printf(<span class="stringliteral">&quot;return: %d\n&quot;</span>, ret);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  printf(<span class="stringliteral">&quot;data: &quot;</span>);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordflow">for</span> (i=0; i&lt;ret; i++) {</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    printf(<span class="stringliteral">&quot;%02hhx  &quot;</span>, rx_buf[i]);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  puts(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  puts(<span class="stringliteral">&quot;Releasing CP2110&quot;</span>);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <a class="code" href="cp2110_8h.html#ae26515140e81c53aeebc18469ca9fe9d">CP2110_release</a>(cp2110);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  puts(<span class="stringliteral">&quot;reading...&quot;</span>);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  ret = <a class="code" href="cp2110_8h.html#a310e39a5be79341bbba104868b6c148f">CP2110_read</a>(cp2110, rx_buf, 3);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  printf(<span class="stringliteral">&quot;return: %d\n&quot;</span>, ret);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  printf(<span class="stringliteral">&quot;data: &quot;</span>);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">for</span> (i=0; i&lt;ret; i++) {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    printf(<span class="stringliteral">&quot;%02hhx  &quot;</span>, rx_buf[i]);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  puts(<span class="stringliteral">&quot;&quot;</span>);</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  puts(<span class="stringliteral">&quot;Releasing CP2110&quot;</span>);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <a class="code" href="cp2110_8h.html#ae26515140e81c53aeebc18469ca9fe9d">CP2110_release</a>(cp2110);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
 <div class="ttc" id="cp2110_8h_html_a7beb73d64f4327ebd6a4dbcc472f1c2aac2270a148861245ba5c110f843101fe0"><div class="ttname"><a href="cp2110_8h.html#a7beb73d64f4327ebd6a4dbcc472f1c2aac2270a148861245ba5c110f843101fe0">FIFO_BOTH</a></div><div class="ttdef"><b>Definition:</b> <a href="cp2110_8h_source.html#l00101">cp2110.h:101</a></div></div>
 <div class="ttc" id="cp2110_8h_html_a9b66b160cfcce5f372634bd92dd73c07"><div class="ttname"><a href="cp2110_8h.html#a9b66b160cfcce5f372634bd92dd73c07">CP2110_enumerate</a></div><div class="ttdeci">struct hid_device_info * CP2110_enumerate(void)</div><div class="ttdoc">Enumerates all connected CP2110 devices (with default VID/PID). </div></div>
 <div class="ttc" id="cp2110_8h_html_a4aa1271a8fb4e6a8b3778e50e836b9aba90674e2854f8cd4ce76ea0b4cd4546cc"><div class="ttname"><a href="cp2110_8h.html#a4aa1271a8fb4e6a8b3778e50e836b9aba90674e2854f8cd4ce76ea0b4cd4546cc">PARITY_NONE</a></div><div class="ttdef"><b>Definition:</b> <a href="cp2110_8h_source.html#l00118">cp2110.h:118</a></div></div>
@@ -206,14 +209,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="cp2110_8h_html_a0fe913f62c04afcfc50b224d14718b34"><div class="ttname"><a href="cp2110_8h.html#a0fe913f62c04afcfc50b224d14718b34">CP2110_disableUART</a></div><div class="ttdeci">int CP2110_disableUART(CP2110_dev *handle)</div><div class="ttdoc">Disables the given CP2110&#39;s UART. </div></div>
 <div class="ttc" id="cp2110_8h_html_a787bbdda1e47f0dbdf6622904f3d1642"><div class="ttname"><a href="cp2110_8h.html#a787bbdda1e47f0dbdf6622904f3d1642">CP2110_init</a></div><div class="ttdeci">CP2110_dev * CP2110_init(void)</div><div class="ttdoc">Connects to the first attached CP2110. </div></div>
 <div class="ttc" id="cp2110_8h_html_aaf1a7e90081f0ba07c35b7a0372ae435a87507ade1df96e6c36364507f5b75100"><div class="ttname"><a href="cp2110_8h.html#aaf1a7e90081f0ba07c35b7a0372ae435a87507ade1df96e6c36364507f5b75100">DATA_BITS_8</a></div><div class="ttdef"><b>Definition:</b> <a href="cp2110_8h_source.html#l00142">cp2110.h:142</a></div></div>
-<div class="ttc" id="cp2110_8h_html"><div class="ttname"><a href="cp2110_8h.html">cp2110.h</a></div><div class="ttdoc">A basic userspcae driver for the CP2110 HID USB-UART IC. </div></div>
+<div class="ttc" id="cp2110_8h_html"><div class="ttname"><a href="cp2110_8h.html">cp2110.h</a></div><div class="ttdoc">A basic userspace driver for the CP2110 HID USB-UART IC. </div></div>
 <div class="ttc" id="cp2110_8h_html_a61fff69427593dbfb17be88843052a55"><div class="ttname"><a href="cp2110_8h.html#a61fff69427593dbfb17be88843052a55">CP2110_purgeFIFO</a></div><div class="ttdeci">int CP2110_purgeFIFO(CP2110_dev *handle, CP2110_fifo fifo)</div><div class="ttdoc">Purges one or both of the given CP2110&#39;s FIFOs. </div></div>
 <div class="ttc" id="cp2110_8h_html_a248956380bed42681864690bcd22a11c"><div class="ttname"><a href="cp2110_8h.html#a248956380bed42681864690bcd22a11c">CP2110_setUARTConfig</a></div><div class="ttdeci">int CP2110_setUARTConfig(CP2110_dev *handle, uint32_t baud, CP2110_parity parity, CP2110_flow_control flow_control, CP2110_data_bits data_bits, CP2110_stop_bits stop_bits)</div><div class="ttdoc">Configures the given CP2110&#39;s UART parameters. </div></div>
 <div class="ttc" id="cp2110_8h_html_ae45e7dd328df2cd6b7297eafa3aad506"><div class="ttname"><a href="cp2110_8h.html#ae45e7dd328df2cd6b7297eafa3aad506">CP2110_write</a></div><div class="ttdeci">int CP2110_write(CP2110_dev *handle, char *tx_buf, int len)</div><div class="ttdoc">Writes len bytes from tx_buf to the given CP2110 handle. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 23 2015 09:37:10 for cp2110-c by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 23 2015 12:11:29 for cp2110-c by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>
