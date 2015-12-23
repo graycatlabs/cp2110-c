@@ -32,8 +32,8 @@
 #define CP2110_VID 0x10c4
 #define CP2110_PID 0xea80
 
-#define REPORT_DATA     0x01
-#define REPORT_DATA_MAX 0x3F
+#define REPORT_DATA           0x01
+#define REPORT_DATA_RX_TX_MAX 63 // 64 byte report size - 1 report id byte
 
 #define REPORT_GET_SET_UART_ENABLE 0x41
 #define REPORT_SET_PURGE_FIFOS     0x43

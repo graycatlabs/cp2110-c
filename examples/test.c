@@ -82,13 +82,16 @@ int main() {
   }
   else puts("UART already enabled");
 
-  strcpy(tx_buf, "abc");
-  printf("Sending message: %s\n", tx_buf);
-  ret = CP2110_write(cp2110, tx_buf, strlen(tx_buf));
+  //strcpy(tx_buf, "abc");
+  for (i=0; i<130; i++) {
+    tx_buf[i] = (uint8_t) i;
+  }
+  //printf("Sending message: %s\n", tx_buf);
+  ret = CP2110_write(cp2110, tx_buf, i);
   printf("return: %d\n", ret);
 
   puts("reading...");
-  ret = CP2110_read(cp2110, rx_buf, 10);
+  ret = CP2110_read(cp2110, rx_buf, 3);
 
   printf("return: %d\n", ret);
   printf("data: ");

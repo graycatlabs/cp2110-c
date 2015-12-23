@@ -126,7 +126,6 @@ int CP2110_setUARTConfig(CP2110_dev *handle,
   buf[8] = (uint8_t) stop_bits;
 
   ret = hid_send_feature_report(handle, buf, sizeof(buf));
-  printf("UART config ret = %d\n", ret);
   if (ret > 0) return 1;
   return ret;
 }
@@ -134,25 +133,25 @@ int CP2110_setUARTConfig(CP2110_dev *handle,
 
 int CP2110_write(CP2110_dev *handle, char *tx_buf, int len) {
   int ret, index, n_sent;
-  uint8_t buf[REPORT_DATA_MAX];
+  uint8_t buf[REPORT_DATA_RX_TX_MAX+1];
   n_sent = 0;
   index = 0;
-  while (len >= REPORT_DATA_MAX) {
-    buf[0] = REPORT_DATA_MAX;
-    memcpy(buf+1, tx_buf+index, REPORT_DATA_MAX);
+  while (len >= REPORT_DATA_RX_TX_MAX) {
+    buf[0] = REPORT_DATA_RX_TX_MAX;
+    memcpy(buf+1, tx_buf+index, REPORT_DATA_RX_TX_MAX);
     ret = hid_write(handle, buf, sizeof(buf));
     if (ret < 0) return ret;
     n_sent += ret-1;
-    if (ret < REPORT_DATA_MAX) {
+    if (ret < REPORT_DATA_RX_TX_MAX+1) {
       // Not all bytes were written, assume error and return
       return n_sent;
     }
-    index += REPORT_DATA_MAX;
-    len -= REPORT_DATA_MAX;
+    index += REPORT_DATA_RX_TX_MAX;
+    len -= REPORT_DATA_RX_TX_MAX;
   }
   if (len) {
     buf[0] = len;
-    memcpy(buf+1, tx_buf+index, REPORT_DATA_MAX);
+    memcpy(buf+1, tx_buf+index, len);
     ret = hid_write(handle, buf, len+1);
     if (ret < 0) return ret;
     n_sent += ret-1;
@@ -163,24 +162,24 @@ int CP2110_write(CP2110_dev *handle, char *tx_buf, int len) {
 
 int CP2110_read(CP2110_dev *handle, char *rx_buf, int len) {
   int ret, index, n_read;
-  uint8_t buf[REPORT_DATA_MAX];
+  uint8_t buf[REPORT_DATA_RX_TX_MAX+1];
   n_read = 0;
   index = 0;
 
-  while (len >= REPORT_DATA_MAX) {
-    buf[0] = REPORT_DATA_MAX;
+  while (len >= REPORT_DATA_RX_TX_MAX) {
+    buf[0] = REPORT_DATA_RX_TX_MAX;
     ret = hid_read(handle, buf, sizeof(buf));
     if (ret < 0) return ret;
     n_read += ret ? ret-1 : 0;
 
     if (ret) memcpy(rx_buf+index, buf, n_read);
 
-    if (ret < REPORT_DATA_MAX) {
+    if (ret < REPORT_DATA_RX_TX_MAX) {
       // Not all bytes were written, assume error and return
       return n_read;
     }
-    index += REPORT_DATA_MAX;
-    len -= REPORT_DATA_MAX;
+    index += REPORT_DATA_RX_TX_MAX;
+    len -= REPORT_DATA_RX_TX_MAX;
   }
   if (len) {
     buf[0] = len;
