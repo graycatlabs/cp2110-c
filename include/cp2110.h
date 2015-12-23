@@ -116,8 +116,8 @@ int CP2110_purgeFIFO(CP2110_dev *handle, CP2110_fifo fifo);
  */
 typedef enum CP2110_parity {
   PARITY_NONE, /**< no parity bit. */
-  PARITY_EVEN, /**< even parity. */
   PARITY_ODD,  /**< odd parity. */
+  PARITY_EVEN, /**< even parity. */
   PARITY_MARK, /**< parity bit always logical 1. */
   PARITY_SPACE /**< parity bit always logical 0. */
 } CP2110_parity;
@@ -136,10 +136,10 @@ typedef enum cp2110_flow_control {
  * ::cp2110_stop_bits.
  */
 typedef enum cp2110_data_bits {
-  DATA_BITS_5 = 0x05, /**< 5 data bits. */
-  DATA_BITS_6,        /**< 6 data bits. */
-  DATA_BITS_7,        /**< 7 data bits. */
-  DATA_BITS_8         /**< 8 data bits. */
+  DATA_BITS_5, /**< 5 data bits. */
+  DATA_BITS_6, /**< 6 data bits. */
+  DATA_BITS_7, /**< 7 data bits. */
+  DATA_BITS_8  /**< 8 data bits. */
 } CP2110_data_bits;
 
 /**
