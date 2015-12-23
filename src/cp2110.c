@@ -19,7 +19,7 @@
  * @file cp2110.c
  * @author Alex Hiam - <alex@graycat.io>
  *
- * @brief A basic userspcae driver for the CP2110 HID USB-UART IC.
+ * @brief A basic userspace driver for the CP2110 HID USB-UART IC.
  *
  */
 

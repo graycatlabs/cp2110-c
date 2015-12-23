@@ -2,7 +2,7 @@
 
 Copyright (c) 2015 - Gray Cat Labs - https://graycat.io
 
-A basic userspcae driver for the CP2110 HID USB-UART IC.
+A basic userspace driver for the CP2110 HID USB-UART IC.
 
 ## Todo
 
