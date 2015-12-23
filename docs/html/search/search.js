@@ -7,12 +7,12 @@
 
 var indexSectionsWithContent =
 {
-  0: "cs",
+  0: "cdfps",
   1: "c",
   2: "c",
   3: "c",
   4: "c",
-  5: "s",
+  5: "dfps",
   6: "c"
 };
 

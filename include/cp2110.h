@@ -96,9 +96,9 @@ int CP2110_disableUART(CP2110_dev *handle);
  * Passed to #CP2110_purgeFIFO to specify which FIFO(s) to purge.
  */
 typedef enum CP2110_fifo {
-  FIFO_TX = 1,
-  FIFO_RX,
-  FIFO_BOTH
+  FIFO_TX = 1, /**< clear the transmit FIFO only */
+  FIFO_RX,     /**< clear the receive FIFO only */
+  FIFO_BOTH    /**< clear both the transmit and receive FIFOs */
 } CP2110_fifo;
 
 /**
@@ -115,29 +115,31 @@ int CP2110_purgeFIFO(CP2110_dev *handle, CP2110_fifo fifo);
  * Passed to #CP2110_setUARTConfig to configure the parity bit.
  */
 typedef enum CP2110_parity {
-  PARITY_NONE,
-  PARITY_EVEN,
-  PARITY_ODD,
-  PARITY_MARK,
-  PARITY_SPACE
+  PARITY_NONE, /**< no parity bit. */
+  PARITY_EVEN, /**< even parity. */
+  PARITY_ODD,  /**< odd parity. */
+  PARITY_MARK, /**< parity bit always logical 1. */
+  PARITY_SPACE /**< parity bit always logical 0. */
 } CP2110_parity;
 
 /**
  * Passed to #CP2110_setUARTConfig to configure the flow control.
  */
 typedef enum cp2110_flow_control {
-  FLOW_CONTROL_DISABLED,
-  FLOW_CONTROL_ENABLED
+  FLOW_CONTROL_DISABLED, /**< don't use flow control. */
+  FLOW_CONTROL_ENABLED   /**< enable RTS/CTS flow control. */
 } CP2110_flow_control;
 
 /**
  * Passed to #CP2110_setUARTConfig to set the number of data bits.
+ * The number of data bits has an effect on the stop bits, see
+ * ::cp2110_stop_bits.
  */
 typedef enum cp2110_data_bits {
-  DATA_BITS_5 = 0x05,
-  DATA_BITS_6,
-  DATA_BITS_7,
-  DATA_BITS_8
+  DATA_BITS_5 = 0x05, /**< 5 data bits. */
+  DATA_BITS_6,        /**< 6 data bits. */
+  DATA_BITS_7,        /**< 7 data bits. */
+  DATA_BITS_8         /**< 8 data bits. */
 } CP2110_data_bits;
 
 /**
@@ -154,9 +156,9 @@ typedef enum cp2110_stop_bits {
  * @param handle CP2110_dev pointer of the connected CP2110.
  * @param baud the desired baud rate in bps (300 <= \a baud <= 500000).
  * @param parity the desired parity, @see ::CP2110_parity.
- * @param flow_control the desired flow control, @see ::CP2110_flow_control.
- * @param data_bits the desired number of data bits, @see ::CP2110_data_bits.
- * @param stop_bits the desired number of stop bits, @see ::CP2110_stop_bits.
+ * @param flow_control the desired flow control, see ::CP2110_flow_control.
+ * @param data_bits the desired number of data bits, see ::CP2110_data_bits.
+ * @param stop_bits the desired number of stop bits, see ::CP2110_stop_bits.
  *
  * @return Returns 1 if successful, -1 if error.
  */

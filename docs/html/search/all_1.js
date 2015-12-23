@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['stop_5fbits_5flong',['STOP_BITS_LONG',['../cp2110_8h.html#a78a0ccc27f18a39d59b61660cd1eeba6a83102977c9ec5c748a50b1d1d35f1267',1,'cp2110.h']]],
-  ['stop_5fbits_5fshort',['STOP_BITS_SHORT',['../cp2110_8h.html#a78a0ccc27f18a39d59b61660cd1eeba6a868d3446ee92513c0cd6fc096be9c8c1',1,'cp2110.h']]]
+  ['data_5fbits_5f5',['DATA_BITS_5',['../cp2110_8h.html#aaf1a7e90081f0ba07c35b7a0372ae435ad0b3c75ee52b5b71c3562d8996056fba',1,'cp2110.h']]],
+  ['data_5fbits_5f6',['DATA_BITS_6',['../cp2110_8h.html#aaf1a7e90081f0ba07c35b7a0372ae435a114089c87f8f4e3b58ec5d157bf0bfc6',1,'cp2110.h']]],
+  ['data_5fbits_5f7',['DATA_BITS_7',['../cp2110_8h.html#aaf1a7e90081f0ba07c35b7a0372ae435a91ea327d09f1d1d7d490bee43f64906b',1,'cp2110.h']]],
+  ['data_5fbits_5f8',['DATA_BITS_8',['../cp2110_8h.html#aaf1a7e90081f0ba07c35b7a0372ae435a87507ade1df96e6c36364507f5b75100',1,'cp2110.h']]]
 ];
