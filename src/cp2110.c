@@ -115,15 +115,15 @@ int CP2110_setUARTConfig(CP2110_dev *handle,
   if (baud < 300) baud = 300;
   else if (baud > 500000) baud = 500000;
 
-  // Force LSB-first of baud (see AN434 section 2.2):
+  // Force MSB-first ordering:
   for (i=0; i<4; i++) {
-    buf[i+1] = 0xff & (baud >> (i*8));
+    buf[i+1] = 0xff & (baud >> ((3-i)*8));
   }
 
-  buf[5] = parity;
-  buf[6] = flow_control;
-  buf[7] = data_bits;
-  buf[8] = stop_bits;
+  buf[5] = (uint8_t) parity;
+  buf[6] = (uint8_t) flow_control;
+  buf[7] = (uint8_t) data_bits;
+  buf[8] = (uint8_t) stop_bits;
 
   ret = hid_send_feature_report(handle, buf, sizeof(buf));
   printf("UART config ret = %d\n", ret);
@@ -139,7 +139,7 @@ int CP2110_write(CP2110_dev *handle, char *tx_buf, int len) {
   index = 0;
   while (len >= REPORT_DATA_MAX) {
     buf[0] = REPORT_DATA_MAX;
-    buf[1] = tx_buf[index];
+    memcpy(buf+1, tx_buf+index, REPORT_DATA_MAX);
     ret = hid_write(handle, buf, sizeof(buf));
     if (ret < 0) return ret;
     n_sent += ret-1;
@@ -152,7 +152,7 @@ int CP2110_write(CP2110_dev *handle, char *tx_buf, int len) {
   }
   if (len) {
     buf[0] = len;
-    buf[1] = tx_buf[index];
+    memcpy(buf+1, tx_buf+index, REPORT_DATA_MAX);
     ret = hid_write(handle, buf, len+1);
     if (ret < 0) return ret;
     n_sent += ret-1;
