@@ -2,7 +2,7 @@
 
 CC       = gcc
 CFLAGS   = -Wall -g
-LIBS     = -ludev -lhidapi-libusb
+LIBS     = -lhidapi-libusb
 INCLUDES = -I../include/
 CP2110   = ../src/cp2110.c
 BIN_DIR = bin
