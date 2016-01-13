@@ -37,7 +37,20 @@
 
 #define REPORT_GET_SET_UART_ENABLE 0x41
 #define REPORT_SET_PURGE_FIFOS     0x43
+#define REPORT_GET_GPIO_VALUES     0x44
+#define REPORT_SET_GPIO_VALUES     0x45
 #define REPORT_GET_SET_UART_CONFIG 0x50
+
+#define CP2110_GPIO0_MASK (0x1)
+#define CP2110_GPIO1_MASK (0x1<<1)
+#define CP2110_GPIO2_MASK (0x1<<2)
+#define CP2110_GPIO3_MASK (0x1<<3)
+#define CP2110_GPIO4_MASK (0x1<<6)
+#define CP2110_GPIO5_MASK (0x1<<7)
+#define CP2110_GPIO6_MASK (0x1<<10)
+#define CP2110_GPIO7_MASK (0x1<<11)
+#define CP2110_GPIO8_MASK (0x1<<12)
+#define CP2110_GPIO9_MASK (0x1<<13)
 
 /**
  * A connected CP2110 device handle.
@@ -194,5 +207,27 @@ int CP2110_write(CP2110_dev *handle, char *tx_buf, int len);
  * @return Returns the number of bytes read or -1 if error.
  */
 int CP2110_read(CP2110_dev *handle, char *rx_buf, int len);
+
+
+/**
+ * @brief Reads and returns the current state of the given GPIO pin.
+ *
+ * @param handle CP2110_dev pointer of the connected CP2110.
+ * @param pin the GPIO pin to read (0-9).
+ *
+ * @return Returns 1 if \a pin is high, 0 if low, and -1 if error.
+ */
+int CP2110_getGPIOPin(CP2110_dev *handle, uint8_t pin);
+
+/**
+ * @brief Sets the state of the given GPIO pin.
+ *
+ * @param handle CP2110_dev pointer of the connected CP2110.
+ * @param pin the GPIO pin to set (0-9).
+ * @param state the state to set the pin to, either 0 or 1.
+ *
+ * @return Returns 0 if successful, -1 if error.
+ */
+int CP2110_setGPIOPin(CP2110_dev *handle, uint8_t pin, uint8_t state);
 
 #endif

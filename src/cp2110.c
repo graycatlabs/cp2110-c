@@ -191,3 +191,116 @@ int CP2110_read(CP2110_dev *handle, char *rx_buf, int len) {
   }
   return n_read;
 }
+
+
+int CP2110_getGPIOPin(CP2110_dev *handle, uint8_t pin) {
+  int ret;
+  uint8_t buf[3];
+  uint16_t values, mask;
+  // Only GPIO pins 0-9 available:
+  if (pin > 9) return -1;
+  buf[0] = REPORT_GET_GPIO_VALUES;
+  ret = hid_get_feature_report(handle, buf, sizeof(buf));
+  if (ret <= 0) return -1;
+
+  values = (buf[1] << 8) | buf[2];
+  switch (pin) {
+    case 0:
+      mask = CP2110_GPIO0_MASK;
+      break;
+    case 1:
+      mask = CP2110_GPIO1_MASK;
+      break;
+    case 2:
+      mask = CP2110_GPIO2_MASK;
+      break;
+    case 3:
+      mask = CP2110_GPIO3_MASK;
+      break;
+    case 4:
+      mask = CP2110_GPIO4_MASK;
+      break;
+    case 5:
+      mask = CP2110_GPIO5_MASK;
+      break;
+    case 6:
+      mask = CP2110_GPIO6_MASK;
+      break;
+    case 7:
+      mask = CP2110_GPIO7_MASK;
+      break;
+    case 8:
+      mask = CP2110_GPIO8_MASK;
+      break;
+    case 9:
+      mask = CP2110_GPIO9_MASK;
+      break;
+    default:
+      // This shouldn't ever happen, but just in case:
+      return -1;
+      break;
+  }
+  if (values & mask) return 1;
+  else return 0;
+}
+
+int CP2110_setGPIOPin(CP2110_dev *handle, uint8_t pin, uint8_t state) {
+  int ret;
+  uint8_t buf[5];
+  uint16_t values, mask;
+  // Only GPIO pins 0-9 available:
+  if (pin > 9) return -1;
+  buf[0] = REPORT_GET_GPIO_VALUES;
+  ret = hid_get_feature_report(handle, buf, 3);
+  if (ret <= 0) return -1;
+
+  values = (buf[1] << 8) | buf[2];
+  switch (pin) {
+    case 0:
+      mask = CP2110_GPIO0_MASK;
+      break;
+    case 1:
+      mask = CP2110_GPIO1_MASK;
+      break;
+    case 2:
+      mask = CP2110_GPIO2_MASK;
+      break;
+    case 3:
+      mask = CP2110_GPIO3_MASK;
+      break;
+    case 4:
+      mask = CP2110_GPIO4_MASK;
+      break;
+    case 5:
+      mask = CP2110_GPIO5_MASK;
+      break;
+    case 6:
+      mask = CP2110_GPIO6_MASK;
+      break;
+    case 7:
+      mask = CP2110_GPIO7_MASK;
+      break;
+    case 8:
+      mask = CP2110_GPIO8_MASK;
+      break;
+    case 9:
+      mask = CP2110_GPIO9_MASK;
+      break;
+    default:
+      // This shouldn't ever happen, but just in case:
+      return -1;
+      break;
+  }
+
+  if (state) values |= mask;
+  else values &= ~mask;
+
+  buf[0] = REPORT_SET_GPIO_VALUES;
+  buf[1] = (values>>8) & 0xff;
+  buf[2] = values & 0xff;
+  buf[3] = (mask>>8) & 0xff;
+  buf[4] = mask & 0xff;
+  ret = hid_send_feature_report(handle, buf, sizeof(buf));
+  if (ret <= 0) return -1;
+  return 0;
+}
