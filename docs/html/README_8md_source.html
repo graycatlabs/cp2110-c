@@ -92,30 +92,41 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;A basic userspace driver for the CP2110 HID USB-UART IC.</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;## Todo</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;## Dependencies</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;* Rename...</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;* Figure out why the UART config is not working</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;* Implement a proper read routine </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;Requires [hidapi](https://github.com/signal11/hidapi). You can install it on Ubuntu with:</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    $ sudo apt-get install libusb-1.0-0-dev libhidapi-dev</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;## License</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;On Linux you will also need to either run programs talking to the CP2110 as root, or add the included udev rule:</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    This program is free software: you can redistribute it and/or modify</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    it under the terms of the GNU General Public License as published by</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    the Free Software Foundation, either version 3 of the License, or</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    (at your option) any later version.</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    $ cd cp2110-c/udev/</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    $ sudo cp 50-cp2110.rules /etc/udev/rules.d/</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;## Todo</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    This program is distributed in the hope that it will be useful,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    but WITHOUT ANY WARRANTY; without even the implied warranty of</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    GNU General Public License for more details.</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    You should have received a copy of the GNU General Public License</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;* Rename...</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;* Implement the one time programmable stuff?</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;* Blocking read?</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;## License</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    This program is free software: you can redistribute it and/or modify</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    it under the terms of the GNU General Public License as published by</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    the Free Software Foundation, either version 3 of the License, or</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    (at your option) any later version.</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    This program is distributed in the hope that it will be useful,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    but WITHOUT ANY WARRANTY; without even the implied warranty of</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    GNU General Public License for more details.</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    You should have received a copy of the GNU General Public License</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 13 2016 19:09:01 for cp2110-c by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 13 2016 22:01:08 for cp2110-c by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -18,8 +18,8 @@ On Linux you will also need to either run programs talking to the CP2110 as root
 ## Todo
 
 * Rename...
-* Figure out why the UART config is not working
-* Implement a proper read routine 
+* Implement the one time programmable stuff?
+* Blocking read?
 
 ## License
 
