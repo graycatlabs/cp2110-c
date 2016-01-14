@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include <hidapi/hidapi.h>
 #include "cp2110.h"
@@ -81,25 +82,57 @@ int main() {
     else puts("UART enabled!");
   }
   else puts("UART already enabled");
+  puts("");
 
-  //strcpy(tx_buf, "abc");
-  for (i=0; i<130; i++) {
-    tx_buf[i] = (uint8_t) i;
-  }
-  //printf("Sending message: %s\n", tx_buf);
-  ret = CP2110_write(cp2110, tx_buf, i);
+  strcpy(tx_buf, "abc");
+  //for (i=0; i<130; i++) {
+  //  tx_buf[i] = (uint8_t) i;
+  //}
+  printf("Sending message: %s\n", tx_buf);
+  ret = CP2110_write(cp2110, tx_buf, 3);
   printf("return: %d\n", ret);
 
+  puts("");
   puts("reading...");
   ret = CP2110_read(cp2110, rx_buf, 3);
 
   printf("return: %d\n", ret);
-  printf("data: ");
-  for (i=0; i<ret; i++) {
-    printf("%02hhx  ", rx_buf[i]);
+  if (ret) {
+    printf("data: ");
+    for (i=0; i<ret; i++) {
+      printf("%02hhx  ", rx_buf[i]);
+    }
   }
   puts("");
 
+  puts("reading GPIO 8");
+  ret = CP2110_getGPIOPin(cp2110, 8);
+  printf("return: %d\n", ret);
+  puts("");
+  
+  puts("setting GPIO 8 low");
+  ret = CP2110_setGPIOPin(cp2110, 8, 0);
+  printf("return: %d\n", ret);
+
+  sleep(1);
+
+  puts("setting GPIO 9 low");
+  ret = CP2110_setGPIOPin(cp2110, 9, 0);
+  printf("return: %d\n", ret);
+
+  sleep(1);
+
+  puts("setting GPIO 8 high");
+  ret = CP2110_setGPIOPin(cp2110, 8, 1);
+  printf("return: %d\n", ret);
+
+  sleep(1);
+
+  puts("setting GPIO 9 high");
+  ret = CP2110_setGPIOPin(cp2110, 9, 1);
+  printf("return: %d\n", ret);
+
+  puts("");
   puts("Releasing CP2110");
   CP2110_release(cp2110);
 
