@@ -4,6 +4,17 @@ Copyright (c) 2015 - Gray Cat Labs - https://graycat.io
 
 A basic userspace driver for the CP2110 HID USB-UART IC.
 
+## Dependencies
+
+Requires [hidapi](https://github.com/signal11/hidapi). You can install it on Ubuntu with:
+
+    $ sudo apt-get install libusb-1.0-0-dev libhidapi-dev
+
+On Linux you will also need to either run programs talking to the CP2110 as root, or add the included udev rule:
+
+    $ cd cp2110-c/udev/
+    $ sudo cp 50-cp2110.rules /etc/udev/rules.d/
+
 ## Todo
 
 * Rename...
