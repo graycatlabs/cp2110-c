@@ -4,6 +4,8 @@ Copyright (c) 2015 - Gray Cat Labs - https://graycat.io
 
 A basic userspace driver for the CP2110 HID USB-UART IC.
 
+[![Build Status](https://ci.graycat.io/buildStatus/icon?job=cp2110-c)](https://ci.graycat.io/job/cp2110-c/)
+
 ## Dependencies
 
 Requires [hidapi](https://github.com/signal11/hidapi). You can install it on Ubuntu with:
